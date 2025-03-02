@@ -22,7 +22,6 @@ class App{
     color ? this.canvas.style.background = color : null;
     const ctx = this.canvas.getContext('2d')
     if(!ctx) throw new Error("Missing CTX");
-
     this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this) )
     this.ctx = ctx;
   }
