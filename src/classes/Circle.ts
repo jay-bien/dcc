@@ -17,16 +17,12 @@ export class Circle {
     }
 
     draw(ctx: CanvasRenderingContext2D) {
-        console.log("draw, " + this.x + ":" + this.y);
-
-        ctx.fillStyle = "purple";
-        ctx.arc(this.x, this.y, 100, 0, 2*Math.PI);
-        ctx.stroke();
         ctx.strokeStyle = this.color;
         ctx.fillStyle = "pink";
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.stroke();
         ctx.closePath();
+        ctx.stroke();
     }
+
 }
