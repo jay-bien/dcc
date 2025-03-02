@@ -1,3 +1,4 @@
+import { Circle } from './classes/Circle';
 import './style.css'
 
 
@@ -13,6 +14,7 @@ class App{
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   mousePos: {x:number, y:number} = {x:0, y:0};
+  circle: Circle;
 
   constructor(canvas_config: CanvasInterface){
     const { element, width, height, color } = canvas_config;
@@ -24,6 +26,7 @@ class App{
     if(!ctx) throw new Error("Missing CTX");
     this.canvas.addEventListener('mousemove', this.onMouseMove.bind(this) )
     this.ctx = ctx;
+    this.circle = new Circle(this.mousePos.x, this.mousePos.y)
   }
 
 
@@ -38,18 +41,11 @@ class App{
     this.loop();
   }
   private update():void{
-    console.log("update");
+    this.circle.update({x: this.mousePos.x, y: this.mousePos.y});
   }
   private draw():void{
-    this.ctx.beginPath();
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.fillStyle = "red";
-    this.ctx.fillRect(0, 0, 300, 300);
-
-    this.ctx.fillStyle = "purple";
-    this.ctx.arc(this.mousePos.x, this.mousePos.y, 100, 0, 2*Math.PI);
-    this.ctx.stroke();
-
+    this.circle.draw(this.ctx);
   }
   private loop(): void{
     this.update();
