@@ -1,6 +1,7 @@
 import { Circle } from './classes/Circle';
 import { Point } from './classes/Point';
 import './style.css'
+import { basicDistanceConstraint } from './utils/bdc';
 
 
 interface CanvasInterface {
@@ -45,7 +46,9 @@ class App{
   }
   private update():void{
     this.circle.update({x: this.mousePos.x, y: this.mousePos.y});
-    this.point.update({x: this.mousePos.x, y:this.mousePos.y});
+    const pointCords = basicDistanceConstraint(this.circle, this.point, this.circle.radius);
+    console.log(pointCords, this.mousePos);
+    this.point.update({x: pointCords.x, y:pointCords.y});
   }
   private draw():void{
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
